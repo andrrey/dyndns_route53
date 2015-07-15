@@ -23,4 +23,10 @@ change_set = boto.route53.record.ResourceRecordSets(connection=conn, hosted_zone
 changes1 = change_set.add_change("UPSERT", sys.argv[1], type="A", ttl=3)
 changes1.add_value(myip)
 change_set.commit()
+subprocess.check_output(['sudo', 'sysctl', '-p', '/etc/sysctl.conf'])
+subprocess.check_output(['sudo', 'iptables', '-F'])
+subprocess.check_output(['sudo', 'iptables', '-P', 'INPUT', 'ACCEPT'])
+subprocess.check_output(['sudo', 'iptables', '-P', 'FORWARD', 'ACCEPT'])
+subprocess.check_output(['sudo', 'iptables', '-P', 'OUTPUT', 'ACCEPT'])
+subprocess.check_output(['sudo', 'iptables', '-t', 'nat', '-A', 'POSTROUTING', '-j', 'MASQUERADE'])
 
