@@ -1,4 +1,4 @@
-#!/usr/bin/python3.4
+#!/usr/bin/python3
 
 import boto.route53
 from boto.route53.record import Record
