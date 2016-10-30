@@ -4,7 +4,9 @@ import boto.route53
 from boto.route53.record import Record
 import subprocess
 import sys
+import time
 
+time.sleep(10)
 myip = subprocess.check_output(['/usr/bin/curl', '-s', 'http://instance-data/latest/meta-data/public-ipv4']).decode('utf-8')
 conn = boto.route53.connect_to_region('us-west-2')
 zone = conn.get_zone(sys.argv[1] + '.')
